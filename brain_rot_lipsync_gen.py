@@ -169,7 +169,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Generate a Sydney Sweeney & Ronaldo convo video.")
     parser.add_argument("--topic", type=str, default="Vectors", help="Topic for the conversation.")
-    parser.add_argument("--api_key", type=str, default="AIzaSyBiNa6VwwigPrad-zxAKWNTXf_iAxG7jgo", help="Gemini API key.")
+    parser.add_argument("--api_key", type=str, default="", help="Gemini API key.")
     parser.add_argument("--output", type=str, default="sydney_ronaldo_convo.mp4", help="Final output video path.")
     parser.add_argument("--temp_dir", type=str, default="tmp_conversation_clips", help="Directory for intermediate clips.")
     parser.add_argument("--model", type=str, default="gemini-2.5-flash", help="Gemini model to use.")
