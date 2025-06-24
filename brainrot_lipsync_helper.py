@@ -8,6 +8,7 @@ if musetalk_path not in sys.path:
 import time
 import pdb
 import re
+import random
 
 import gradio as gr
 import numpy as np
@@ -365,30 +366,32 @@ def check_video(video):
 
 def gen_video_with_audio(character, text_to_audio):
     if character == "sydney":
-        ref_audio_path = "/workspace/brain_rot_db/sydney-sweeney/sydsweeney-2.mp3"
-        ref_audio_transcript_path = "/workspace/brain_rot_db/sydney-sweeney/transcript-sydsweeney-2.txt"
+        ref_audio_path = "/workspace/brain_rot_db/sydney-sweeney_old/sydsweeney-2.mp3"
+        ref_audio_transcript_path = "/workspace/brain_rot_db/sydney-sweeney_old/transcript-sydsweeney-2.txt"
         with open(ref_audio_transcript_path, 'r') as f: ref_audio_transcript = f.read()
 
         cli_command_voice_gen = f"""f5-tts_infer-cli --model F5TTS_v1_Base --ref_audio "{ref_audio_path}" --ref_text "{ref_audio_transcript}" --gen_text "{text_to_audio}" --output_file /workspace/brain_rot_audio_gen/output.wav"""
         subprocess.run(cli_command_voice_gen, shell=True)
         audio_path = "/workspace/brain_rot_audio_gen/output.wav"
-        input_video_path = "/workspace/brain_rot_db/sydney-sweeney/sydsweeney-2.mp4"
-        processed_input_video_path = check_video(input_video_path)
+        # input_video_path = "/workspace/brain_rot_db/sydney-sweeney_old/sydsweeney-2.mp4"
+        input_video_path = random.choice(os.listdir("/workspace/brain_rot_db/syd-sweeny"))
+        processed_input_video_path = check_video(os.path.join("/workspace/brain_rot_db/syd-sweeny", input_video_path))
         output_video_path, _ = inference(audio_path, processed_input_video_path, bbox_shift=0, extra_margin=10, parsing_mode="jaw", 
                 left_cheek_width=30, right_cheek_width=30, progress=gr.Progress(track_tqdm=True))
     
     if character == "ronaldo":
-        ref_audio_path = "/workspace/brain_rot_db/ronaldo/ronaldo.mp3"
-        ref_audio_transcript_path = "/workspace/brain_rot_db/ronaldo/transcript-ronaldo.txt"
+        ref_audio_path = "/workspace/brain_rot_db/ronaldo_old/ronaldo.mp3"
+        ref_audio_transcript_path = "/workspace/brain_rot_db/ronaldo_old/transcript-ronaldo.txt"
         with open(ref_audio_transcript_path, 'r') as f: ref_audio_transcript = f.read()
 
         cli_command_voice_gen = f"""f5-tts_infer-cli --model F5TTS_v1_Base --ref_audio "{ref_audio_path}" --ref_text "{ref_audio_transcript}" --gen_text "{text_to_audio}" --output_file /workspace/brain_rot_audio_gen/output.wav"""
         subprocess.run(cli_command_voice_gen, shell=True)
         audio_path = "/workspace/brain_rot_audio_gen/output.wav"
-        input_video_path = "/workspace/brain_rot_db/ronaldo/ronaldo.mp4"
-        processed_input_video_path = check_video(input_video_path)
+        # input_video_path = "/workspace/brain_rot_db/ronaldo_old/ronaldo.mp4"
+        input_video_path = random.choice(os.listdir("/workspace/brain_rot_db/ronaldo"))
+        processed_input_video_path = check_video(os.path.join("/workspace/brain_rot_db/ronaldo", input_video_path))
         output_video_path, _ = inference(audio_path, processed_input_video_path, bbox_shift=0, extra_margin=10, parsing_mode="jaw", 
-                left_cheek_width=30, right_cheek_width=30, progress=gr.Progress(track_tqdm=True))
+                left_cheek_width=10, right_cheek_width=10, progress=gr.Progress(track_tqdm=True))
 
     if character == "tsway":
         ref_audio_path = "/workspace/brain_rot_db/tsway/tsway.mp3"
