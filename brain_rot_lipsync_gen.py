@@ -21,9 +21,9 @@ def configure_gemini(api_key: str):
     Configure the Google Gen AI client with the given API key.
     """
     # Option A: via environment variable
-    os.environ["GOOGLE_API_KEY"] = api_key
+    # os.environ["GOOGLE_API_KEY"] = api_key
     # Create client
-    client = genai.Client(api_key=api_key)
+    client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
     return client
 
 
@@ -163,35 +163,35 @@ def create_brain_rot_video(
     print(f"Final video saved to {final_output}")
 
 # Example usage
-if __name__ == "__main__":
-    import argparse
-    import time
+# if __name__ == "__main__":
+#     import argparse
+#     import time
 
-    parser = argparse.ArgumentParser(description="Generate a Sydney Sweeney & Ronaldo convo video.")
-    parser.add_argument("--topic", type=str, default="Vectors", help="Topic for the conversation.")
-    parser.add_argument("--api_key", type=str, default="", help="Gemini API key.")
-    parser.add_argument("--output", type=str, default="sydney_ronaldo_convo.mp4", help="Final output video path.")
-    parser.add_argument("--temp_dir", type=str, default="tmp_conversation_clips", help="Directory for intermediate clips.")
-    parser.add_argument("--model", type=str, default="gemini-2.5-flash", help="Gemini model to use.")
-    args = parser.parse_args()
+#     parser = argparse.ArgumentParser(description="Generate a Sydney Sweeney & Ronaldo convo video.")
+#     parser.add_argument("--topic", type=str, default="Vectors", help="Topic for the conversation.")
+#     parser.add_argument("--api_key", type=str, default="", help="Gemini API key.")
+#     parser.add_argument("--output", type=str, default="sydney_ronaldo_convo.mp4", help="Final output video path.")
+#     parser.add_argument("--temp_dir", type=str, default="tmp_conversation_clips", help="Directory for intermediate clips.")
+#     parser.add_argument("--model", type=str, default="gemini-2.5-flash", help="Gemini model to use.")
+#     args = parser.parse_args()
 
-    start_time = time.time()
-    create_brain_rot_video(
-        topic="Dot product of 2 vectors",
-        api_key=args.api_key,
-        temp_dir="tmp_conversation_clips_1",
-        final_output="sydney_ronaldo_convo_1.mp4",
-        model_name=args.model
-    )
-    print(f"Time taken to generate skit = {time.time()-start_time}")
+#     start_time = time.time()
+#     create_brain_rot_video(
+#         topic="Dot product of 2 vectors",
+#         api_key=args.api_key,
+#         temp_dir="tmp_conversation_clips_1",
+#         final_output="sydney_ronaldo_convo_1.mp4",
+#         model_name=args.model
+#     )
+#     print(f"Time taken to generate skit = {time.time()-start_time}")
 
-    start_time = time.time()
-    create_brain_rot_video(
-        topic="Co-efficient of friction (mu)",
-        api_key=args.api_key,
-        temp_dir="tmp_conversation_clips_2",
-        final_output="sydney_ronaldo_convo_2.mp4",
-        model_name=args.model
-    )
+#     start_time = time.time()
+#     create_brain_rot_video(
+#         topic="Co-efficient of friction (mu)",
+#         api_key=args.api_key,
+#         temp_dir="tmp_conversation_clips_2",
+#         final_output="sydney_ronaldo_convo_2.mp4",
+#         model_name=args.model
+#     )
 
-    print(f"Time taken to generate skit = {time.time()-start_time}")
+    # print(f"Time taken to generate skit = {time.time()-start_time}")
