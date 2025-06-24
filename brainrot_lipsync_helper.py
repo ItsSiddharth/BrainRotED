@@ -393,15 +393,15 @@ def gen_video_with_audio(character, text_to_audio):
         output_video_path, _ = inference(audio_path, processed_input_video_path, bbox_shift=0, extra_margin=10, parsing_mode="jaw", 
                 left_cheek_width=10, right_cheek_width=10, progress=gr.Progress(track_tqdm=True))
 
-    if character == "tsway":
-        ref_audio_path = "/workspace/brain_rot_db/tsway/tsway.mp3"
-        ref_audio_transcript_path = "/workspace/brain_rot_db/tsway/transcript-tsway.txt"
+    if character == "taylor":
+        ref_audio_path = "/workspace/brain_rot_db/tsway/taylor_audio.mp3"
+        ref_audio_transcript_path = "/workspace/brain_rot_db/tsway/taylor_audio_transcript.txt"
         with open(ref_audio_transcript_path, 'r') as f: ref_audio_transcript = f.read()
 
         cli_command_voice_gen = f"""f5-tts_infer-cli --model F5TTS_v1_Base --ref_audio "{ref_audio_path}" --ref_text "{ref_audio_transcript}" --gen_text "{text_to_audio}" --output_file /workspace/brain_rot_audio_gen/output.wav"""
         subprocess.run(cli_command_voice_gen, shell=True)
         audio_path = "/workspace/brain_rot_audio_gen/output.wav"
-        input_video_path = "/workspace/brain_rot_db/tsway/tsway.mp4"
+        input_video_path = "/workspace/brain_rot_db/tsway/taylor_db_1.mp4"
         processed_input_video_path = check_video(input_video_path)
         output_video_path, _ = inference(audio_path, processed_input_video_path, bbox_shift=0, extra_margin=10, parsing_mode="jaw", 
                 left_cheek_width=30, right_cheek_width=30, progress=gr.Progress(track_tqdm=True))
@@ -411,5 +411,5 @@ def gen_video_with_audio(character, text_to_audio):
 
 # if __name__ == "__main__":
 #     # text_to_audio = "Matrices are pretty straightforward babe, dont worry too much. Just look into my eyes and let me help you understand it. It is just a way of representing data that has both spatial and inherent meaning. The number 1, \"alone\"  has only an inherent value of 1 but when you write it inside the square bracket is now having a position information of 0 and inherent information of the value of 1. Just keep this analogy in mind and you will be able to apply this anywhere."
-#     text_to_audio = "Hello my biggest fan, I know you have come to my doorstep. So i thought I'd say hi. Thanks for all the support Kriti, it means the world to me. My mind turns your life into folklore."
-#     gen_video_with_audio("tsway", text_to_audio)
+#     text_to_audio = "Hello my biggest fan, I know you have come to my doorstep. So i thought I'd say hi. I love you Kriti. My mind turns your life into folklore."
+#     gen_video_with_audio("taylor", text_to_audio)
